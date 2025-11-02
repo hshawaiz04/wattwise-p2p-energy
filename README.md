@@ -10,7 +10,7 @@ This project was built for a hackathon to demonstrate a **community-level peer-t
 
 ## 🚀 Live Demo (Optional)
 If hosted on GitHub Pages or any server:
-> 🔗 [Live Demo](https://yourusername.github.io/wattwise-p2p-energy)
+> 🔗 [Live Demo](https://hshawaiz04.github.io/wattwise-p2p-energy)
 
 ---
 
