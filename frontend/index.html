@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>⚡ WattWise — Community Energy Market</title>
+
+  <!-- Prevent caching during dev -->
+  <meta http-equiv="cache-control" content="no-cache, no-store, must-revalidate" />
+  <meta http-equiv="pragma" content="no-cache" />
+  <meta http-equiv="expires" content="0" />
+
+  <!-- Tailwind CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            blackish: '#0f0f0f',
+            yellowish: '#facc15',
+            lilac: '#c084fc',
+          },
+        },
+      },
+    };
+  </script>
+
+  <!-- Chart.js CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+
+  <!-- Socket.io client CDN -->
+  <script src="https://cdn.socket.io/4.7.4/socket.io.min.js"></script>
+</head>
+
+<body class="bg-blackish text-white min-h-screen">
+  <div class="max-w-6xl mx-auto p-6">
+    <header class="flex justify-between items-center mb-6">
+      <div class="flex items-center gap-3">
+        <svg class="w-8 h-8" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden>
+          <path d="M13 2L3 14H12L11 22L21 10H12L13 2Z" fill="#facc15"/>
+        </svg>
+        <h1 class="text-3xl font-bold text-yellowish tracking-wide">WattWise</h1>
+      </div>
+      <div class="text-right">
+        <div class="text-sm text-gray-300">Community Energy Credits</div>
+        <div id="price" class="text-3xl font-bold text-lilac transition-all duration-500">-- EC</div>
+        <div class="mt-2 flex gap-4 justify-end text-xs text-gray-300">
+          <div><span class="text-yellowish font-medium" id="totalGen">--</span> kWh generated</div>
+          <div><span class="text-lilac font-medium" id="totalDem">--</span> kWh consumed</div>
+          <div><span class="text-yellowish font-medium" id="totalEC">--</span> EC traded</div>
+        </div>
+      </div>
+    </header>
+
+    <main class="grid grid-cols-3 gap-4">
+      <section class="col-span-2 space-y-4">
+        <div id="flats" class="grid grid-cols-2 gap-3"></div>
+
+        <div class="p-4 bg-blackish border border-lilac rounded-lg shadow-lg">
+          <h3 class="font-semibold text-yellowish mb-2">Demo Controls</h3>
+          <p class="text-sm text-gray-400 mb-2">Simulate solar/consumption to trigger credit trades.</p>
+          <div id="controls" class="flex flex-wrap gap-2"></div>
+        </div>
+
+        <div class="p-4 bg-blackish border border-yellowish rounded-lg shadow-lg">
+          <h3 class="font-semibold text-yellowish mb-2">Energy Flow Overview</h3>
+          <div class="relative h-40">
+            <canvas id="energyChart" class="absolute top-0 left-0 w-full h-full"></canvas>
+          </div>
+        </div>
+      </section>
+
+      <aside class="space-y-4">
+        <div class="p-3 bg-blackish border border-yellowish rounded-lg shadow-lg">
+          <h3 class="font-semibold text-yellowish mb-2">Recent Energy Trades</h3>
+          <div id="trades" class="text-xs space-y-2 max-h-64 overflow-auto text-gray-200"></div>
+        </div>
+
+        <div class="p-3 bg-blackish border border-lilac rounded-lg shadow-lg">
+          <h3 class="font-semibold text-lilac mb-2">Blockchain Ledger</h3>
+          <div id="ledger" class="text-xs text-gray-300 break-all"></div>
+        </div>
+
+        <div class="p-3 bg-blackish border border-lilac rounded-lg shadow-lg overflow-x-auto">
+          <h3 class="font-semibold text-lilac mb-2">Block View</h3>
+          <div id="chainViz" class="flex space-x-2"></div>
+        </div>
+
+        <div class="p-3 bg-blackish border border-yellowish rounded-lg shadow-lg">
+          <h3 class="font-semibold text-yellowish mb-2">Top Energy Earners</h3>
+          <div id="leaderboard" class="text-sm space-y-1 text-gray-200"></div>
+        </div>
+      </aside>
+    </main>
+  </div>
+
+  <!-- Versioned script tag forces browser to fetch latest file during dev. Bump v= after edits -->
+  <script src="./script.js?v=20251102_2"></script>
+</body>
+</html>
